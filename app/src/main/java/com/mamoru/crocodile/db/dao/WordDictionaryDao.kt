@@ -20,4 +20,7 @@ interface WordDictionaryDao {
 
     @Delete
     suspend fun deleteDictionary(dictionary: WordDictionaryEntity)
+
+    @Query("DELETE FROM word_dictionaries")
+    suspend fun deleteAll()
 }

@@ -7,4 +7,5 @@
     <string name="next_word_label">Current word</string>
     <string name="next_word">Next word</string>
     <string name="next_word_empty_dictionary">Dictionary is empty</string>
+    <string name="settings_delete_data">Delete data</string>
 </resources>

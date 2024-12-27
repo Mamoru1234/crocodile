@@ -35,7 +35,7 @@ fun NextWordScreen(onBackClick: () -> Unit, model: NextWordScreenModel = hiltVie
         Surface(modifier = Modifier.padding(innerPadding)) {
             Column(modifier = Modifier.padding(horizontal = 8.dp).fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
                 WordComponent(nextWord)
-                Button(model::selectNextWord) {
+                Button(model::selectNextWord, modifier = Modifier.padding(vertical = 10.dp)) {
                     Text(stringResource(R.string.next_word))
                 }
             }

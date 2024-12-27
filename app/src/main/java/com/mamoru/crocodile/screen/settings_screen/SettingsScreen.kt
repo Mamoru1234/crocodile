@@ -32,6 +32,9 @@ fun SettingsScreen(onBackClick: () -> Unit, model: SettingsScreenModel = hiltVie
                 Button(onClick = model::loadSystemDictionaries, enabled = !isDictionariesLoading) {
                     Text(stringResource(R.string.settings_load_dictionaries))
                 }
+                Button(onClick = model::deleteData) {
+                    Text(stringResource(R.string.settings_delete_data))
+                }
             }
         }
     }

@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.mamoru.crocodile.db.dao.ActiveGameDao
 import com.mamoru.crocodile.db.dao.WordDao
 import com.mamoru.crocodile.db.dao.WordDictionaryDao
 import com.mamoru.crocodile.db.entities.WordDictionaryEntity
@@ -23,6 +24,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SettingsScreenModel @Inject constructor(
     @ApplicationContext private val context: Context,
+    private val activeGameDao: ActiveGameDao,
     private val wordDictionaryDao: WordDictionaryDao,
     private val wordDao: WordDao,
 ): ViewModel() {
@@ -33,6 +35,7 @@ class SettingsScreenModel @Inject constructor(
         const val TAG = "WelcomeScreenModel"
         val SYSTEM_DICTIONARIES = listOf(
             SystemDictionary("Легкий", "easy"),
+            SystemDictionary("Test", "test"),
         )
     }
     fun loadSystemDictionaries() {
@@ -42,6 +45,13 @@ class SettingsScreenModel @Inject constructor(
                 loadDictionary(it)
             }
             _isDictionariesLoading.value = false
+        }
+    }
+
+    fun deleteData() {
+        viewModelScope.launch {
+            activeGameDao.deleteAll()
+            wordDictionaryDao.deleteAll()
         }
     }
 

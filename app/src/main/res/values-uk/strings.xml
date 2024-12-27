@@ -8,4 +8,5 @@
     <string name="next_word_label">Поточне слово</string>
     <string name="next_word">Наступне слово</string>
     <string name="next_word_empty_dictionary">Порожній словник</string>
+    <string name="settings_delete_data">Видалити данні</string>
 </resources>
