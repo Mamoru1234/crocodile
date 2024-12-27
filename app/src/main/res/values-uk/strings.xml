@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Крокодил</string>
+    <string name="welcome_new_game">Нова гра</string>
+    <string name="welcome_settings">Налаштування</string>
+    <string name="settings_load_dictionaries">Завантажити словники</string>
+    <string name="select_dictionary_label">Вибрати словник</string>
+    <string name="next_word_label">Поточне слово</string>
+    <string name="next_word">Наступне слово</string>
+    <string name="next_word_empty_dictionary">Порожній словник</string>
+</resources>
