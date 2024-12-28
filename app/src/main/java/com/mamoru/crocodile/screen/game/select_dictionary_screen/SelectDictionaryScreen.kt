@@ -1,7 +1,7 @@
 package com.mamoru.crocodile.screen.game.select_dictionary_screen
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -34,11 +34,15 @@ fun SelectDictionaryScreen(
         modifier = Modifier.fillMaxSize(),
         topBar = {AppTopBar(onBackClick) { Text(stringResource(R.string.select_dictionary_label)) }}) { innerPadding ->
         Surface(modifier = Modifier.padding(innerPadding)) {
-            LazyColumn(modifier = Modifier.padding(horizontal = 8.dp).fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+            LazyColumn(
+                modifier = Modifier.padding(horizontal = 8.dp).fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+                ) {
                 items(dictionaries, key = WordDictionaryEntity::id) {
                     Button({
                         model.selectDictionary(it.id, onDictionarySelected)
-                    }) {
+                    }, modifier = Modifier.padding(bottom = 8.dp)) {
                         Text(it.name)
                     }
                 }

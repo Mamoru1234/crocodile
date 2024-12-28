@@ -35,6 +35,7 @@ class SettingsScreenModel @Inject constructor(
         const val TAG = "WelcomeScreenModel"
         val SYSTEM_DICTIONARIES = listOf(
             SystemDictionary("Легкий", "easy"),
+            SystemDictionary("Середній", "medium"),
             SystemDictionary("Test", "test"),
         )
     }
