@@ -5,9 +5,11 @@
     <string name="settings_load_dictionaries">Load system dictionaries</string>
     <string name="select_dictionary_label">Select dictionary</string>
     <string name="next_word_label">Current word</string>
-    <string name="next_word">Next word</string>
     <string name="next_word_empty_dictionary">Dictionary is empty</string>
     <string name="settings_delete_data">Delete data</string>
     <string name="next_word_google">Google word</string>
     <string name="welcome_resume_game">Resume game</string>
+    <string name="new_word_done">showen</string>
+    <string name="next_word_skip">Skip</string>
+    <string name="next_word_completed_words_counter">Completed words</string>
 </resources>

@@ -11,7 +11,9 @@ import com.mamoru.crocodile.db.entities.UsedWordEntity
 import com.mamoru.crocodile.db.entities.WordDictionaryEntity
 import com.mamoru.crocodile.db.entities.WordEntity
 
-@Database(entities = [ActiveGameEntity::class, WordDictionaryEntity::class, WordEntity::class, UsedWordEntity::class], version = 3)
+@Database(entities = [
+    ActiveGameEntity::class, WordDictionaryEntity::class, WordEntity::class, UsedWordEntity::class
+ ], version = 4)
 abstract class AppDb: RoomDatabase() {
     abstract fun activeGameDao(): ActiveGameDao
     abstract fun dictionaryDao(): WordDictionaryDao

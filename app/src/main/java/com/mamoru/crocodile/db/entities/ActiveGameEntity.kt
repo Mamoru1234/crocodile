@@ -7,4 +7,5 @@ import androidx.room.PrimaryKey
 data class ActiveGameEntity(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val selectedDictionaryId: Int = -1,
+    val completedWords: Int = 0,
 )

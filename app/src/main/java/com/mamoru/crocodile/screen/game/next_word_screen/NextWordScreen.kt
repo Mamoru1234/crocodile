@@ -3,10 +3,15 @@ package com.mamoru.crocodile.screen.game.next_word_screen
 import android.net.Uri
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.sharp.Refresh
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
@@ -31,6 +36,7 @@ import com.mamoru.crocodile.components.AppTopBar
 @Composable
 fun NextWordScreen(onBackClick: () -> Unit, model: NextWordScreenModel = hiltViewModel()) {
     val nextWord by model.selectedWord.collectAsStateWithLifecycle()
+    val completedWords by model.completedWords.collectAsStateWithLifecycle()
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
@@ -38,13 +44,37 @@ fun NextWordScreen(onBackClick: () -> Unit, model: NextWordScreenModel = hiltVie
         },
     ) { innerPadding ->
         Surface(modifier = Modifier.padding(innerPadding)) {
-            Column(modifier = Modifier.padding(horizontal = 8.dp).fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
-                WordComponent(nextWord)
-                Button(model::selectNextWord, modifier = Modifier.padding(vertical = 12.dp), enabled = nextWord != null) {
-                    Text(stringResource(R.string.next_word))
+            Column {
+                CompletedWords(completedWords, model::resetCompletedWords)
+                Column(modifier = Modifier.padding(horizontal = 8.dp).fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
+                    SwipingCard(onUpSwipe = model::completedWord, onDownSwipe = model::selectNextWord) {
+                        Row(
+                            modifier = Modifier.fillMaxSize(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Center) {
+                            WordComponent(nextWord)
+                        }
+                    }
+                    WordLink(nextWord)
                 }
-                WordLink(nextWord)
             }
+        }
+    }
+}
+
+@Composable
+fun CompletedWords(completedWords: Int?, onReset: () -> Unit) {
+    if (completedWords == null) {
+        return
+    }
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text("${stringResource(R.string.next_word_completed_words_counter)}: $completedWords", style = MaterialTheme.typography.bodyMedium)
+        IconButton(onReset) {
+            Icon(Icons.Sharp.Refresh, "Reset")
         }
     }
 }
@@ -74,6 +104,6 @@ fun WordComponent(word: String?) {
             color = MaterialTheme.colorScheme.secondary,
             fontSize = 34.sp)
     } else {
-        Text(word, fontWeight = FontWeight.Bold, fontSize = 40.sp)
+        Text(word, fontWeight = FontWeight.Bold)
     }
 }

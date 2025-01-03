@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 3,
-    "identityHash": "57ca8f7579f16286cbf50c89d31e99d6",
+    "identityHash": "fe3c947c5d5a5bfaf1f96dfa57761557",
     "entities": [
       {
         "tableName": "active_games",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `selectedDictionaryId` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `selectedDictionaryId` INTEGER NOT NULL, `completedWords` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -17,6 +17,12 @@
           {
             "fieldPath": "selectedDictionaryId",
             "columnName": "selectedDictionaryId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "completedWords",
+            "columnName": "completedWords",
             "affinity": "INTEGER",
             "notNull": true
           }
@@ -182,7 +188,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '57ca8f7579f16286cbf50c89d31e99d6')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'fe3c947c5d5a5bfaf1f96dfa57761557')"
     ]
   }
 }

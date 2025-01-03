@@ -6,9 +6,11 @@
     <string name="settings_load_dictionaries">Завантажити словники</string>
     <string name="select_dictionary_label">Вибрати словник</string>
     <string name="next_word_label">Поточне слово</string>
-    <string name="next_word">Наступне слово</string>
     <string name="next_word_empty_dictionary">Порожній словник</string>
     <string name="settings_delete_data">Видалити данні</string>
     <string name="next_word_google">Загуглити</string>
     <string name="welcome_resume_game">Продовжити гру</string>
+    <string name="new_word_done">Показано</string>
+    <string name="next_word_skip">Пропустити</string>
+    <string name="next_word_completed_words_counter">Показані слова</string>
 </resources>
