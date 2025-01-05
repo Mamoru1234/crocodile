@@ -1,6 +1,7 @@
 package com.mamoru.crocodile.screen.game.next_word_screen
 
 import android.net.Uri
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,9 +20,11 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -31,12 +34,15 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mamoru.crocodile.R
 import com.mamoru.crocodile.components.AppTopBar
+import com.mamoru.crocodile.ui.theme.Completed
+import com.mamoru.crocodile.ui.theme.Skipped
 
 @ExperimentalMaterial3Api
 @Composable
 fun NextWordScreen(onBackClick: () -> Unit, model: NextWordScreenModel = hiltViewModel()) {
     val nextWord by model.selectedWord.collectAsStateWithLifecycle()
     val completedWords by model.completedWords.collectAsStateWithLifecycle()
+    val currentColor = remember { mutableStateOf(Color.Unspecified) }
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
@@ -46,8 +52,27 @@ fun NextWordScreen(onBackClick: () -> Unit, model: NextWordScreenModel = hiltVie
         Surface(modifier = Modifier.padding(innerPadding)) {
             Column {
                 CompletedWords(completedWords, model::resetCompletedWords)
-                Column(modifier = Modifier.padding(horizontal = 8.dp).fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
-                    SwipingCard(onUpSwipe = model::completedWord, onDownSwipe = model::selectNextWord) {
+                Column(
+                    modifier = Modifier.padding(horizontal = 8.dp).fillMaxSize().background(currentColor.value),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center) {
+                    SwipingCard(onSwiping = {
+                        direction ->
+                        when (direction) {
+                            SwipeDirection.UP -> currentColor.value = Completed
+                            SwipeDirection.DOWN -> currentColor.value = Skipped
+                            SwipeDirection.NONE -> currentColor.value = Color.Unspecified
+                        }
+                    }, onSwiped = {
+                        direction ->
+                        currentColor.value = Color.Unspecified
+                        if (direction == SwipeDirection.UP) {
+                            model.completedWord()
+                        }
+                        if (direction == SwipeDirection.DOWN) {
+                            model.selectNextWord()
+                        }
+                    }) {
                         Row(
                             modifier = Modifier.fillMaxSize(),
                             verticalAlignment = Alignment.CenterVertically,
